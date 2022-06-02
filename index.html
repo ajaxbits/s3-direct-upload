@@ -6,18 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    @import "./base.css"
+  </style>
+  <style>
     @import "./index.css"
   </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Document</title>
 </head>
 <body>
-  
-  <form id="imageForm">
-    <input id="imageInput" type="file" accept="image/*">
-    <button type="submit">Upload</button>
-  </form>
-
+  <section> 
+    <form id="imageForm">
+      <fieldset>
+        <legend>Profile Creation</legend>
+        <input id="imageInput" type="file" accept="image/*">
+        <button type="submit">Upload</button>
+      </fieldset>
+    </form>
+  </section>
 
   <script type="module">
         import './app.js';
