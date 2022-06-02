@@ -11,8 +11,8 @@ import { promisify } from "util";
 const bucket = "alex-is-tired-quarantine";
 const region = "us-west-1";
 const credentials = {
-  accessKeyId: "",
-  secretAccessKey: "",
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
 };
 
 const client = new S3Client({
