@@ -1,13 +1,20 @@
-const fetch = require('node-fetch');
-function loadHTML() {
-  fetch("./index.html")
-    .then((response) => response.text());
-}
+var fs = require("fs");
+
+// using the readFileSync() function
+// and passing the path to the file
+const buffer = fs.readFileSync("index.html");
+
+// use the toString() method to convert
+// Buffer into String
+const html = buffer.toString();
 
 exports.handler = async (event) => {
   const response = {
     statusCode: 200,
-    body: loadHTML(),
+    headers: {
+      "Content-Type": "text/html",
+    },
+    body: html,
   };
   return response;
 };
