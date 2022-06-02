@@ -1,3 +1,4 @@
+const fetch = require('node-fetch');
 function loadHTML() {
   fetch("./index.html")
     .then((response) => response.text());
