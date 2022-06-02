@@ -8,8 +8,8 @@ import { formatUrl } from "@aws-sdk/util-format-url";
 import crypto from "crypto";
 import { promisify } from "util";
 
-const bucket = "alex-is-tired-quarantine";
-const region = "us-west-1";
+const bucket = process.env.BUCKET;
+const region = process.env.REGION;
 const credentials = {
   accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
