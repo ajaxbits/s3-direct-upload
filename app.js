@@ -9,6 +9,7 @@ import crypto from "crypto";
 import { promisify } from "util";
 
 const bucket = "alex-is-tired-quarantine";
+const accessPoint = bucket;
 const region = "us-west-1";
 
 const credentials = {
@@ -34,7 +35,7 @@ async function generateUploadURL() {
     expiresIn: 3600,
   });
   const getObjectCommand = new GetObjectCommand({
-    Bucket: bucket,
+    Bucket: accessPoint,
     Key: imageName,
   });
   const getUrl = await getSignedUrl(client, getObjectCommand, {
