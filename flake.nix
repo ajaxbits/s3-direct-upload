@@ -11,7 +11,7 @@
       {
         devShell = pkgs.mkShell {
           nativeBuildInputs = [ pkgs.bashInteractive ];
-          buildInputs = with pkgs; [ nodejs yarn ];
+          buildInputs = with pkgs; [ nodejs yarn zip ];
         };
       });
 }
