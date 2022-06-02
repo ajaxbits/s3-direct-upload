@@ -213,3 +213,4 @@ typings/
 # Parcel related files
 dist/
 .cache/
+**.zip

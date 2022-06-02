@@ -24,6 +24,6 @@
     "start": "parcel serve",
     "build": "parcel build",
     "prebuild": "rm -rf dist",
-    "postbuild": "cp index.js dist/index.js"
+    "postbuild": "zip imageUpload.zip dist index.js -jr"
   }
 }
