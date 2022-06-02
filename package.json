@@ -1,0 +1,8 @@
+{
+  "name": "s3-direct-upload",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Sam-Meech-Ward/s3-direct-upload.git",
+  "author": "Alex Jackson <ajaxbits@pm.me>",
+  "license": "MIT"
+}
