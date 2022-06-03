@@ -6,6 +6,7 @@
   "author": "Alex Jackson <ajaxbits@pm.me>",
   "license": "MIT",
   "devDependencies": {
+    "@parcel/transformer-inline-string": "2.6.0",
     "assert": "^2.0.0",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",

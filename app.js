@@ -1,9 +1,5 @@
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import {
-  GetObjectCommand,
-  PutObjectCommand,
-  S3Client,
-} from "@aws-sdk/client-s3";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { formatUrl } from "@aws-sdk/util-format-url";
 import crypto from "crypto";
 import { promisify } from "util";
@@ -16,6 +12,8 @@ const credentials = {
   accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
 };
+
+const api_endpoint = process.env.API_ENDPOINT || "/";
 
 const client = new S3Client({
   region: region,
@@ -34,14 +32,7 @@ async function generateUploadURL() {
   const putUrl = await getSignedUrl(client, putObjectCommand, {
     expiresIn: 3600,
   });
-  const getObjectCommand = new GetObjectCommand({
-    Bucket: accessPoint,
-    Key: imageName,
-  });
-  const getUrl = await getSignedUrl(client, getObjectCommand, {
-    expiresIn: 3600,
-  });
-  return { putUrl, getUrl };
+  return { putUrl, imageName };
 }
 
 // init
@@ -53,9 +44,9 @@ imageForm.addEventListener("submit", async (event) => {
   const file = imageInput.files[0];
 
   // get secure url from our server
-  const { putUrl, getUrl } = await generateUploadURL();
+  const { putUrl, imageName } = await generateUploadURL();
   console.log(putUrl);
-  console.log(getUrl);
+  console.log(imageName);
 
   // post the image direclty to the s3 bucket
   await fetch(putUrl, {
@@ -63,7 +54,18 @@ imageForm.addEventListener("submit", async (event) => {
     body: file,
   });
 
+  const getUrl = await fetch(
+    `${api_endpoint}geturl/${imageName}`,
+  ).then((response) => response.json());
+
   const img = document.createElement("img");
-  img.src = getUrl;
+  img.src = await fetch(getUrl).then((response) => {
+    if (response.status == 200) {
+      return getUrl;
+    } else {
+      return `https://http.cat/${response.status}`;
+    }
+  });
+
   document.body.appendChild(img);
 });
